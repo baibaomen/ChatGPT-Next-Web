@@ -1,4 +1,10 @@
-body{
-    color:red;
-    background-color: brown;
+/*隐藏github按钮。*/
+a[href="https://github.com/Yidadaa/ChatGPT-Next-Web"] {
+    display: none;
 }
+
+/*隐藏设置里的访问密码框。*/
+#custom-model{
+    display: none;
+}
+

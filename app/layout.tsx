@@ -38,6 +38,8 @@ export default function RootLayout({
         <meta name="config" content={JSON.stringify(getClientConfig())} />
         <link rel="manifest" href="/site.webmanifest"></link>
         <script src="/serviceWorkerRegister.js" defer></script>
+        <link rel="stylesheet" href="/customize.css" data-precedence="next"/>
+        <link rel="preload" href="/customize.js" as="script"/>
       </head>
       <body>
         {children}

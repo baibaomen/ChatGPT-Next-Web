@@ -39,7 +39,7 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest"></link>
         <script src="/serviceWorkerRegister.js" defer></script>
         <link rel="stylesheet" href="/customize.css" data-precedence="next"/>
-        <script type="text/javascript" src="/customize.js"></script>
+        <script async type="text/javascript" src="/customize.js"></script>
       </head>
       <body>
         {children}

@@ -158,7 +158,7 @@ export function SideBar(props: { className?: string }) {
           Baibaomen AI Assistant
         </div>
         <div className={styles["sidebar-sub-title"]}>
-          Build your own AI assistant.
+          Making your daily work easier and enjoyable.
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />

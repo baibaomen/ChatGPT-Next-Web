@@ -547,7 +547,7 @@ export function ImagePreviewer(props: {
           </div>
 
           <div>
-            <div className={styles["main-title"]}>Baibaomen AI Assistant</div>
+            <div className={styles["main-title"]}>BAIBAOMEN AI ASSISTANT</div>
             <div className={styles["sub-title"]}>
               github.com/Yidadaa/ChatGPT-Next-Web
             </div>

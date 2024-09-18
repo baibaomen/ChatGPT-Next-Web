@@ -101,19 +101,3 @@ export async function handle(
     return NextResponse.json(prettyObject(e));
   }
 }
-
-    // 返回OpenAI的响应，并在头信息中加入token count
-    const headers = new Headers(response.headers);
-    headers.set("X-Token-Count", tokenCount.toString());
-
-    const body = await response.text(); // 获取OpenAI响应的文本
-    return new NextResponse(body, {
-      status: response.status,
-      headers,
-    });
-
-  } catch (e) {
-    console.error("[OpenAI] ", e);
-    return NextResponse.json(prettyObject(e));
-  }
-}

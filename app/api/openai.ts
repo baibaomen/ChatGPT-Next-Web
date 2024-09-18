@@ -8,6 +8,9 @@ import { requestOpenai } from "./common";
 
 const ALLOWD_PATH = new Set(Object.values(OpenaiPath));
 
+// 你的token计数服务的URL
+const TOKEN_COUNTER_URL = 'https://ticktoken-counter.vercel.app/';
+
 function getModels(remoteModelRes: OpenAIListModelResponse) {
   const config = getServerSideConfig();
 
@@ -21,20 +24,30 @@ function getModels(remoteModelRes: OpenAIListModelResponse) {
 
   return remoteModelRes;
 }
-async function getTokenCount(messages: any, model: string) {
-  try {
-    // 将 messages 数组序列化为 JSON 字符串
-    const messagesString = JSON.stringify(messages);
 
-    const tokenRes = await fetch(
-      `https://ticktoken-counter.vercel.app/?model=${model}&message=${encodeURIComponent(messagesString)}`,
-      { method: "POST" }
-    );
-    const data = await tokenRes.json();
-    return data.token_count;
+// 计算token数的辅助函数
+async function calculateTokenCount(messages: any[], model: string): Promise<number> {
+  const messageParam = encodeURIComponent(JSON.stringify(messages));
+  const url = `${TOKEN_COUNTER_URL}?model=${model}&message=${messageParam}`;
+
+  try {
+    const tokenResponse = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'accept': 'application/json',
+      },
+    });
+
+    if (!tokenResponse.ok) {
+      console.error("[Token Counter] Failed to fetch token count");
+      return 0; // 返回默认的0，避免报错
+    }
+
+    const tokenData = await tokenResponse.json();
+    return tokenData.token_count || 0;
   } catch (error) {
-    console.error("Error fetching token count:", error);
-    return null;
+    console.error("[Token Counter] Error calculating token count", error);
+    return 0;
   }
 }
 
@@ -71,24 +84,34 @@ export async function handle(
   }
 
   try {
-    const requestBody = await req.json();
-    const messages = requestBody?.messages || []; // 获取 messages 数组
-    const model = requestBody?.model || "gpt-3.5-turbo"; // 从请求中获取模型，默认是 gpt-3.5-turbo
+    const response = await requestOpenai(req);
 
-    // 并行发起两个请求：Token 计数服务和 OpenAI 请求
-    const [tokenCount, openaiResponse] = await Promise.all([
-      getTokenCount(messages, model), // 请求Token计数
-      requestOpenai(req), // 请求OpenAI
-    ]);
+    // list models
+    if (subpath === OpenaiPath.ListModelPath && response.status === 200) {
+      const resJson = (await response.json()) as OpenAIListModelResponse;
+      const availableModels = getModels(resJson);
+      return NextResponse.json(availableModels, {
+        status: response.status,
+      });
+    }
 
-    // 返回响应，并附加自定义头
-    const openaiResponseBody = await openaiResponse.json();
-    return NextResponse.json(openaiResponseBody, {
-      status: openaiResponse.status,
-      headers: {
-        "X-Token-Count": tokenCount?.toString() || "unknown", // 将token计数放入自定义头
-      },
+    return response;
+  } catch (e) {
+    console.error("[OpenAI] ", e);
+    return NextResponse.json(prettyObject(e));
+  }
+}
+
+    // 返回OpenAI的响应，并在头信息中加入token count
+    const headers = new Headers(response.headers);
+    headers.set("X-Token-Count", tokenCount.toString());
+
+    const body = await response.text(); // 获取OpenAI响应的文本
+    return new NextResponse(body, {
+      status: response.status,
+      headers,
     });
+
   } catch (e) {
     console.error("[OpenAI] ", e);
     return NextResponse.json(prettyObject(e));

@@ -1,0 +1,86 @@
+[class^="home_sidebar-title__"] {
+    font-size: 0; /* 隐藏原有文本 */
+  }
+  
+  [class^="home_sidebar-title__"]::before {
+    content: "长城人寿AI助手";
+    font-size: initial; /* 恢复字体大小 */
+    display: inline-block;
+  }
+
+  [class^="home_sidebar-sub-title__"] {
+    font-size: 0; /* 隐藏原有文本 */
+  }
+
+  [class^="home_sidebar-header-bar__"]{
+    display: none!important;
+  }
+  
+
+  /* [class^="home_sidebar-actions__"]:first-of-type [class^="home_sidebar-action__"]:nth-child(2), */
+[class^="home_sidebar-actions__"]:first-of-type [class^="home_sidebar-action__"]:nth-child(3) {
+  display: none;
+}
+
+[class^="home_sidebar-actions__"]:first-of-type [class^="home_sidebar-action__"]:nth-child(2){
+    transform: scale(1.5);
+    transform-origin: bottom left;  /* 确保从右下角开始变换 */
+}
+[class^="home_sidebar-actions__"]:nth-of-type(2) {
+    transform: scale(1.5);
+    transform-origin: bottom right;  /* 确保从右下角开始变换 */
+  }
+
+
+  [class^="chat_chat-input-actions__"]
+  {
+    display: none!important;
+  }
+
+  [class^="chat_chat-message-edit__"]{
+    display: none!important;
+  }
+
+  [class="window-action-button"]:nth-of-type(1),
+  [class="window-action-button"]:nth-of-type(2),
+  [class="window-action-button"]:nth-of-type(3){
+    display: none!important;
+  }
+  
+/* 隐藏设置页面中的两个选项 */
+  [class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(1) [class^="ui-lib_list-item__"]:nth-child(2),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(1) [class^="ui-lib_list-item__"]:nth-child(3),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(1) [class^="ui-lib_list-item__"]:nth-child(5),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(1) [class^="ui-lib_list-item__"]:nth-child(7),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(1) [class^="ui-lib_list-item__"]:nth-child(8),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(1) [class^="ui-lib_list-item__"]:nth-child(9),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(1) [class^="ui-lib_list-item__"]:nth-child(10),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(1) [class^="ui-lib_list-item__"]:nth-child(11),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(2), 
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(3),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(4),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(5),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(2),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(3),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(4),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(5),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(6),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(7),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(8),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(9),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(10),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(11),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(6)  [class^="ui-lib_list-item__"]:nth-child(12),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(7),
+[class^="settings_settings__"] [class^="ui-lib_list__"]:nth-child(8)  {
+    /* color: red!important; */
+    display: none!important;
+}
+  
+#chat-input::placeholder {
+    opacity: 0;
+  }
+
+  
+  
+

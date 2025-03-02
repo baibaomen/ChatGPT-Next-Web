@@ -37,6 +37,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="stylesheet" href="/baibaomen.css" />
+        <script src="/baibaomen-head.js" defer></script>
         <meta name="config" content={JSON.stringify(getClientConfig())} />
         <meta
           name="viewport"
@@ -48,6 +50,7 @@ export default function RootLayout({
           crossOrigin="use-credentials"
         ></link>
         <script src="/serviceWorkerRegister.js" defer></script>
+        <script src="/baibaomen-tail.js" defer></script>
       </head>
       <body>
         {children}
